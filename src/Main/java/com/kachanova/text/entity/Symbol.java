@@ -1,5 +1,6 @@
 package com.kachanova.text.entity;
 
+// Leaf node in Composite pattern. Represents a single character.
 public class Symbol implements TextComponent {
 
     private final char value;

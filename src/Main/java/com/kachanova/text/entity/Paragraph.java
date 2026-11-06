@@ -2,7 +2,9 @@ package com.kachanova.text.entity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
+// Composite node containing Sentence components.
 public class Paragraph implements TextComponent {
 
     private final List<Sentence> sentences;
@@ -12,26 +14,20 @@ public class Paragraph implements TextComponent {
     }
 
     public void addSentence(Sentence sentence) {
+        if (sentence == null) {
+            throw new IllegalArgumentException("Sentence cannot be null");
+        }
         sentences.add(sentence);
     }
 
     public List<Sentence> getSentences() {
-        return new ArrayList<>(sentences);
+        return List.copyOf(sentences);
     }
 
     @Override
     public String restore() {
-        StringBuilder result = new StringBuilder();
-
-        for (int i = 0; i < sentences.size(); i++) {
-            if (i > 0) {
-                result.append(" ");
-            }
-
-            result.append(sentences.get(i).restore());
-        }
-
-        return result.toString();
+        return sentences.stream()
+                .map(Sentence::restore)
+                .collect(Collectors.joining(" "));
     }
 }
-
