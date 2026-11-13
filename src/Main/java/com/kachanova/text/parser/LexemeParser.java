@@ -1,23 +1,20 @@
 package com.kachanova.text.parser;
 
-import com.kachanova.text.entity.Lexeme;
+import com.kachanova.text.entity.Symbol;
 import com.kachanova.text.entity.TextComponent;
-import com.kachanova.text.exception.TextException;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import com.kachanova.text.entity.TextComposite;
 
-// Final parser in the chain. Creates Lexeme leaf nodes.
+// Final parser in the chain. Creates a composite of Symbols (a lexeme).
 public class LexemeParser extends AbstractTextParser {
-
-    private static final Logger logger = LogManager.getLogger(LexemeParser.class);
 
     @Override
     public TextComponent parse(String text) {
-        if (text == null) {
-            throw new TextException("Input text cannot be null");
+        // Create a lexeme composite with an empty delimiter.
+        TextComposite lexeme = new TextComposite("");
+        // Break the string down into individual Symbol objects.
+        for (char c : text.toCharArray()) {
+            lexeme.add(new Symbol(c));
         }
-
-        logger.info("Creating a Lexeme component from text chunk: '{}'.", text);
-        return new Lexeme(text);
+        return lexeme;
     }
 }

@@ -1,16 +1,18 @@
 package com.kachanova.text.parser;
 
-// Abstract base class for Chain of Responsibility.
-// Holds reference to the next parser in the chain.
-public abstract class AbstractTextParser implements TextParser {
+// Abstract base class for the Chain of Responsibility.
+public abstract class AbstractTextParser implements BasicParser {
 
-    private TextParser nextParser;
+    // Reference to the next handler in the chain.
+    private BasicParser nextParser;
 
-    public void setNextParser(TextParser nextParser) {
+    // Sets the next parser.
+    public void setNextParser(BasicParser nextParser) {
         this.nextParser = nextParser;
     }
 
-    protected TextParser getNextParser() {
+    // Returns the next parser.
+    protected BasicParser getNextParser() {
         return nextParser;
     }
 }
