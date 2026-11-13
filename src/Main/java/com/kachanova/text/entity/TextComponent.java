@@ -1,8 +1,10 @@
 package com.kachanova.text.entity;
 
-// Component interface for the Composite pattern.
-public interface TextComponent {
+import java.util.List;
 
-    // Restores the original string representation.
+// Base interface for the Composite pattern.
+public interface TextComponent {
     String restore();
+    void add(TextComponent child);
+    List<TextComponent> getChildren();
 }
